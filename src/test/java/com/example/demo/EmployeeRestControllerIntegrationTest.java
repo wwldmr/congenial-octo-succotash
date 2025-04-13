@@ -13,10 +13,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(
@@ -47,9 +45,9 @@ public class EmployeeRestControllerIntegrationTest {
                 .andExpect(jsonPath("$[0].firstname", is("Vasya")));
     }
 
-    private void createTestEmployee(String name) {
+    private void createTestEmployee(String firstname) {
         Employee employee = new Employee();
-        employee.setName(name);
+        employee.setName(firstname);
         repository.save(employee);  // Сохраняем в БД через репозиторий
     }
 }
