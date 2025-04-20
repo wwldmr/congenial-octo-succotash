@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
@@ -19,9 +20,15 @@ public class EmployeeController {
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("get_id/{id}")
     public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") Long employeeId) {
         EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
+        return ResponseEntity.ok(employeeDto);
+    }
+
+    @GetMapping("get_email/{email}")
+    public ResponseEntity<EmployeeDto> getEmployeeByEmail(@PathVariable("email") String email) {
+        EmployeeDto employeeDto = employeeService.getEmployeeByEmail(email);
         return ResponseEntity.ok(employeeDto);
     }
 }

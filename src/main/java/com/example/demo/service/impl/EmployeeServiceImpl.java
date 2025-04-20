@@ -32,4 +32,11 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee is not exists with given id : " + employeeId));
         return EmployeeMapper.mapToEmployeeDto(employee);
     }
+
+    @Override
+    public EmployeeDto getEmployeeByEmail(String email) {
+        Employee employee = employeeRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with email: " + email));
+        return EmployeeMapper.mapToEmployeeDto(employee);
+    }
 }
